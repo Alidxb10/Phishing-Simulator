@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Simulation</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+          }
+          
+          li {
+            float: left;
+            border-right:1px solid #bbb;
+          }
+          
+          li:last-child {
+            border-right: none;
+          }
+          
+          li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+          }
+          
+          li a:hover:not(.active) {
+            background-color: #111;
+          }
+          .active {
+            background-color: #04AA6D;
+          }
+        body {
+            font-family: Arial, sans-serif;
+            background-color:  #0a0f1d;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            color: #00e6e6;
+        }
+
+        header {
+            background-color: #1d2438;
+            color: #00e6e6;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00e6e6;
+            position: relative;
+        }
+
+        header a {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #00e6e6;
+            color: #1d2438;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 20px;
+            gap: 20px;
+            overflow: auto;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .phishing-section {
+            background-color: #1d2438;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 230, 230, 0.2);
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        select, textarea, input[type=email] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            background-color: #111c29;
+            color: #00e6e6;
+            border: 1px solid #00e6e6;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: #007b7b;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #00cccc;
+        }
+
+        h2 {
+            border-bottom: 2px solid #00e6e6;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #1d2438;
+            color: #00e6e6;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .report-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a class="active" href="/dashboard.html">Home</a></li>
+        <li><a href="/index.html">Pentesting</a></li>
+        <li><a href="/phishing.html">phishing</a></li>
+        <li style="float:right"><a href="/aboutus.html">About</a></li>
+        <li style="float:right"><a href="/LoginPage.html">Logout</a></li>
+    </ul>
+    </ul>
+    <header>
+        <h1>Phishing Simulation</h1>
+
+    </header>
+
+    <main>
+        <div class="phishing-section">
+            <h2>Create Phishing Campaign</h2>
+            <label for="email-input">Target Email Address:</label>
+            <input type="email" id="email-input" placeholder="Enter email address">
+
+            <label for="template-select">Select Phishing Template:</label>
+            <select id="template-select">
+                <option value="suspicious-invoice">Suspicious Invoice</option>
+                <option value="account-verification">Account Verification Required</option>
+                <option value="password-reset">Password Reset Request</option>
+                <option value="urgent-security-update">Urgent Security Update</option>
+            </select>
+
+            <button id="start-phishing">Start Phishing Simulation</button>
+
+            <div id="simulation-status">Status: <span id="status">Idle</span></div>
+        </div>
+
+        <div class="report-section">
+            <h2>Phishing Campaign Report</h2>
+            <textarea id="report-output" rows="10" readonly></textarea>
+        </div>
+    </main>
+
+    <footer>
+        VigilAE Secure 2024
+    </footer>
+
+    <script>
+        const phishingButton = document.getElementById('start-phishing');
+        const statusElement = document.getElementById('status');
+        const reportOutput = document.getElementById('report-output');
+        const emailInput = document.getElementById('email-input');
+        const templateSelect = document.getElementById('template-select');
+
+        phishingButton.addEventListener('click', function () {
+            const email = emailInput.value;
+            const template = templateSelect.value;
+
+            if (!email) {
+                alert('Please enter a target email address.');
+                return;
+            }
+
+            statusElement.textContent = 'Running Phishing Simulation...';
+
+            // Simulate phishing attack
+            setTimeout(() => {
+                // Dummy results after "phishing simulation"
+                const report = `Phishing Campaign Report for ${email}
+
+- Template Used: ${template}
+- Result: The target clicked on the link and provided credentials.
+- Awareness Level: Low`;
+
+                reportOutput.textContent = report;
+                statusElement.textContent = 'Phishing Simulation Completed';
+            }, 3000); // Simulating a 3-second phishing simulation delay
+        });
+    </script>
+</body>
+
+</html>
